@@ -1,0 +1,426 @@
+Lista de exercícios Algoritmo Teórico
+
+Questão 1)
+
+1)
+
+#include <stdio.h>
+
+int main() {
+    float temperatura;
+
+    do {
+        printf("Digite a temperatura atual (em °C): ");
+        scanf("%f", &temperatura);
+
+        if (temperatura < 20.0 || temperatura > 25.0) {
+            printf("Alerta! Temperatura fora da faixa segura! (20°C - 25°C)\n");
+        } else {
+            printf("Temperatura dentro da faixa segura.\n");
+        }
+
+    } while (temperatura < 20.0 || temperatura > 25.0); 
+    
+	printf("Temperatura estável. Monitoramento concluído.\n");
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------
+
+2)
+
+#include <stdio.h>
+
+int main() {
+    int combustivel;
+
+    do {
+        printf("Digite o nível de combustível atual (em %%): ");
+        scanf("%d", &combustivel);
+
+        if (combustivel < 15) {
+            printf("Alerta! Nível de combustível baixo! Por favor, recarregue o veículo.\n");
+        } else if (combustivel < 100) {
+            printf("Nível de combustível adequado, continue monitorando até 100%%.\n");
+        }
+
+    } while (combustivel < 100); 
+
+    printf("Tanque cheio! Monitoramento concluído.\n");
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------
+
+3)
+
+#include <stdio.h>
+
+int main() {
+    int passos, total_passos = 0;
+    const int META_DIARIA = 10000;
+
+    while (total_passos < META_DIARIA) {
+        printf("Digite o número de passos dados: ");
+        scanf("%d", &passos);
+
+        if (passos > 0) {
+            total_passos += passos;
+            printf("Total de passos até agora: %d\n", total_passos);
+
+            if (total_passos >= META_DIARIA) {
+                printf("Parabéns! Você atingiu a meta de 10.000 passos!\n");
+            }
+        } else {
+            printf("Por favor, insira um número positivo de passos.\n");
+        }
+    }
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------
+
+4)
+
+#include <stdio.h>
+
+int main() {
+    float deposito;
+    const float DEPOSITO_MINIMO = 500.0;
+
+    do {
+        printf("Digite o valor do depósito inicial para abrir a conta (mínimo R$500,00): ");
+        scanf("%f", &deposito);
+
+        if (deposito < DEPOSITO_MINIMO) {
+            printf("Erro: O valor do depósito inicial deve ser de pelo menos R$500,00.\n");
+        } else {
+            printf("Depósito aceito. Conta aberta com sucesso!\n");
+        }
+
+    } while (deposito < DEPOSITO_MINIMO); 
+    
+	return 0;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Questão 2)
+
+1) 
+
+#include <stdio.h>
+#include <string.h>
+
+void executarComando(const char* comando) {
+    if (strcmp(comando, "frente") == 0) {
+        printf("Movendo para frente.\n");
+    } else if (strcmp(comando, "tras") == 0) {
+        printf("Movendo para trás.\n");
+    } else if (strcmp(comando, "esquerda") == 0) {
+        printf("Virando para a esquerda.\n");
+    } else if (strcmp(comando, "direita") == 0) {
+        printf("Virando para a direita.\n");
+    } else {
+        printf("Comando inválido.\n");
+    }
+}
+
+int main() {
+    char comando[10];
+    
+    printf("Comandos disponíveis:\n");
+    printf("- frente\n");
+    printf("- tras\n");
+    printf("- esquerda\n");
+    printf("- direita\n");
+    printf("- sair\n");
+
+    while (1) {
+        printf("Digite o comando: ");
+        scanf("%s", comando);
+
+        if (strcmp(comando, "sair") == 0) {
+            break;
+        }
+
+        executarComando(comando);
+    }
+
+    printf("Programa encerrado.\n");
+    return 0;
+}
+
+_______________________________________________________________________________
+
+2)
+
+#include <stdio.h>
+
+void verificarDistancia(float distancia) {
+    if (distancia < 10) {
+        printf("Distância registrada: %.2f cm (Abaixo do limite!)\n", distancia);
+    } else {
+        printf("Distância registrada: %.2f cm\n", distancia);
+    }
+}
+
+int main() {
+    float distancia = 0;
+
+    while (1) {
+        printf("Informe a distância medida pelo sensor (em cm): ");
+        scanf("%f", &distancia);
+
+        verificarDistancia(distancia);
+
+        if (distancia < 10) {
+            break;
+        }
+    }
+
+    printf("Encerrando o programa.\n");
+    return 0;
+}
+
+_________________________________________________________________________________
+
+3)
+
+#include <stdio.h>
+
+void executarAcao(int opcao) {
+    switch (opcao) {
+        case 1:
+            printf("Lâmpada ligada.\n");
+            break;
+        case 2:
+            printf("Som tocando.\n");
+            break;
+        case 3:
+            printf("Braço movendo.\n");
+            break;
+        case 0:
+            printf("Encerrando programa.\n");
+            break;
+        default:
+            printf("Opção inválida.\n");
+    }
+}
+
+int main() {
+    int escolha;
+
+    do {
+        printf("\nMenu de Ações:\n");
+        printf("[1] - Ligar lâmpada\n");
+        printf("[2] - Tocar som\n");
+        printf("[3] - Mover braço\n");
+        printf("[0] - Encerrar\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &escolha);
+
+        executarAcao(escolha);
+    } while (escolha != 0);
+
+    return 0;
+}
+
+______________________________________________________________________
+
+4)
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+float gerarNivelBateria() {
+    return rand() % 101; 
+}
+
+void verificarBateria(float nivel) {
+    printf("Nível de bateria: %.2f%%\n", nivel);
+    if (nivel < 20) {
+        printf("Aviso: Bateria baixa!\n");
+    } else {
+        printf("Bateria está dentro do nível seguro.\n");
+    }
+}
+
+int desejaContinuar() {
+    int escolha;
+    printf("Digite 0 para encerrar ou qualquer outro número para continuar: ");
+    scanf("%d", &escolha);
+    return escolha;
+}
+
+int main() {
+    srand(time(NULL)); 
+
+    while (1) {
+        float nivel_bateria = gerarNivelBateria();
+        verificarBateria(nivel_bateria);
+
+        if (desejaContinuar() == 0) {
+            break;
+        }
+    }
+
+    printf("Programa encerrado.\n");
+    return 0;
+}
+
+________________________________________________________________________________________
+
+5)
+
+#include <stdio.h>
+#include <string.h>
+
+#define TAM_GRID 5
+
+void exibirPosicao(int x, int y) {
+    printf("O robô está agora na posição (%d, %d).\n", x, y);
+}
+
+int moverRobo(char* comando, int* x, int* y) {
+    if (strcmp(comando, "cima") == 0 && *y > 0) {
+        (*y)--;
+        return 1;
+    } else if (strcmp(comando, "baixo") == 0 && *y < TAM_GRID - 1) {
+        (*y)++;
+        return 1;
+    } else if (strcmp(comando, "esquerda") == 0 && *x > 0) {
+        (*x)--;
+        return 1;
+    } else if (strcmp(comando, "direita") == 0 && *x < TAM_GRID - 1) {
+        (*x)++;
+        return 1;
+    } else if (strcmp(comando, "parar") == 0) {
+        return 0;
+    } else if (strcmp(comando, "parar") != 0) {
+        printf("Comando inválido ou movimento fora do grid.\n");
+    }
+    return 1;
+}
+
+void exibirMenu() {
+    printf("Bem-vindo ao sistema de navegação do robô!\n");
+    printf("O grid é de tamanho %dx%d.\n", TAM_GRID, TAM_GRID);
+    printf("Comandos disponíveis:\n");
+    printf("- cima\n");
+    printf("- baixo\n");
+    printf("- esquerda\n");
+    printf("- direita\n");
+    printf("- parar\n");
+}
+
+int main() {
+    int x = 2, y = 2; 
+    char comando[10];
+    
+    exibirMenu();
+    exibirPosicao(x, y);
+
+    while (1) {
+        printf("\nDigite o comando: ");
+        scanf("%s", comando);
+
+        if (!moverRobo(comando, &x, &y)) {
+            break;
+        }
+
+        exibirPosicao(x, y);
+    }
+
+    printf("Programa encerrado. Posição final do robô: (%d, %d).\n", x, y);
+    return 0;
+}
+
+/////////////////////////////////////////////////////////////////////////////////
+
+Questão 3)
+
+1) int cameraData[10];
+
+
+2) Esse código lê o valor do pino analógico A1 e o armazena na posição 3 do vetor cameraData.
+
+
+3) float temperaturas[] = {25.5, 26.0, 24.8, 27.3, 26.5};
+
+___________________________________________________________
+
+4) for (int i = 0; i < 4; i++) {
+    Serial.println(ledPins[i]);
+}
+
+___________________________________________________________
+
+5) int ledPins[] = {2, 3, 4, 5}; 
+
+void setup() {
+    Serial.begin(9600); 
+}
+
+void loop() {
+    for (int i = 0; i < 4; i++) {
+        Serial.println(ledPins[i]);
+    }
+    delay(1000); }
+___________________________________________________________
+
+6) int randomValues[5]; 
+void setup() {
+    Serial.begin(9600);
+    randomSeed(analogRead(0)); 
+    for (int i = 0; i < 5; i++) {
+        randomValues[i] = random(0, 101); 
+        Serial.println(randomValues[i]); 
+    }
+}
+
+void loop() {
+}
+___________________________________________________________
+
+7) for (int i = 0; i < tamanhoVetor; i++) {
+    if (sensorReadings[i] == 150) {
+        break; // Encerra o loop se o valor 150 for encontrado
+    }
+}
+
+___________________________________________________________
+
+8) A instrução sizeof(sensorData) / sizeof(sensorData[0]) calcula o número de elementos de um vetor. O sizeof(sensorData) dá o tamanho total em bytes do vetor, e o sizeof(sensorData[0]) dá o tamanho de um elemento. Dividindo os dois, obtemos a quantidade de elementos do vetor, útil para trabalhar dinamicamente com seu tamanho.
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+Questão 4)
+
+a) Os valores na primeira linha da matriz representam as leituras de temperatura (em graus Celsius) coletadas em cinco momentos diferentes no primeiro local de monitoramento. Os valores são: 22, 25, 23, 21 e 24 graus Celsius.
+
+b) Os valores da segunda linha da matriz (relacionados à umidade do solo) são: 45, 38, 42, 40 e 37.
+
+c) Os valores da terceira linha (relacionados à concentração de CO₂ em ppm) são: 400, 380, 420, 410 e 390. O valor máximo é 420 ppm, que ocorre no terceiro momento (índice 2).
+
+d) int totalLocais = 3;
+int totalLeituras = 5;
+int somaTemperaturas = 0;
+
+for (int i = 0; i < totalLocais; i++) {
+  for (int j = 0; j < totalLeituras; j++) {
+    somaTemperaturas += ambientData[i][j];
+  }
+}
+
+
+float mediaTemperaturas = (float)somaTemperaturas / (totalLocais * totalLeituras);
+
+Serial.begin(9600);
+Serial.print("A média de temperatura em todos os locais é: ");
+Serial.println(mediaTemperaturas);
+
